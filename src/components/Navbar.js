@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {toggleSidebar} from "../features/user/userSlice";
 
 const Navbar = () => {
+    const [showLogout, setShowLogout] = useState(false)
     const {user} = useSelector((state) => state.user)
     const dispatch = useDispatch();
 
@@ -24,12 +25,12 @@ const Navbar = () => {
                     <h3 className={'logo-text'}>Dashboard</h3>
                 </div>
                 <div className="btn-container">
-                    <button type={'button'} className={'btn'} onClick={() => console.log('toggle logout dropdown')}>
+                    <button type={'button'} className={'btn'} onClick={() => setShowLogout(!showLogout)}>
                         <FaUserCircle/>
                         {user?.name}
                         <FaCaretDown/>
                     </button>
-                    <div className="dropdown show-dropdown">
+                    <div className={showLogout ? 'show-dropdown dropdown' : 'dropdown'}>
                         <button type={"button"} className={'dropdown-btn'} onClick={() => console.log('loggout user')} >
                             logout
                         </button>
