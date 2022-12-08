@@ -5,6 +5,7 @@ import {addUserToLocalStorage, getUserToLocalStorage} from "../../utils/localSto
 
 const initialState = {
     isLoading: false,
+    isSidebarOpen: false,
     user: getUserToLocalStorage(),
 };
 
@@ -61,6 +62,11 @@ const userSlice = createSlice({
     //         toast.error(payload)
     //     },
     // }
+    reducers:  {
+        toggleSidebar: (state) => {
+            state.isSidebarOpen = !state.isSidebarOpen;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(registerUser.pending, (state) => {
@@ -95,4 +101,5 @@ const userSlice = createSlice({
     },
 });
 
+export const {toggleSidebar} = userSlice.actions
 export default userSlice.reducer;
