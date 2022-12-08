@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Dashboard = () => {
+const BigSidebar = () => {
     return (
         <div>
-            dashbord
+            BigSidebar
         </div>
     );
 };
 
-export default Dashboard;
+export default BigSidebar;
