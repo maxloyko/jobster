@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Wrapper from "../assets/wrappers/Navbar";
 const Navbar = () => {
     return (
-        <h2>
-            NavBar
-        </h2>
+        <Wrapper>
+            <h2>NavBar</h2>
+        </Wrapper>
     );
 };
 

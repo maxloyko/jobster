@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Wrapper from "../assets/wrappers/SmallSidebar";
 const SmallSidebar = () => {
     return (
-        <div>
-            Small Sidebar
-        </div>
+        <Wrapper>
+            <h2>Small Sidebar</h2>
+        </Wrapper>
     );
 };
 
