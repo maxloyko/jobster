@@ -4,6 +4,7 @@ import {Logo, FormRow} from '../component'
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser, registerUser} from "../features/user/userSlice";
+import {useNavigate} from "react-router-dom";
 
 const initialState = {
     name: '',
@@ -16,7 +17,7 @@ const Register = () => {
     const [values, setValues] = useState(initialState)
     const {user, isLoading} = useSelector(store => store.user)
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const toggleMember = () => {
         setValues({...values, isMember: !values.isMember})
     }
@@ -42,6 +43,12 @@ const Register = () => {
         dispatch(registerUser({email, name, password}))
 
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
     return (
         <Wrapper className={'full-page'}>
             <form className={'form'} onSubmit={handleSubmit}>
