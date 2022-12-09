@@ -2,7 +2,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import {FormRow, FormRowSelect} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
-import {handleChange, clearValues, createJob} from "../../features/job/jobSlice";
+import {handleChange, clearValues, createJob, editJob} from "../../features/job/jobSlice";
 import {useEffect} from "react";
 
 const AddJob = () => {
@@ -16,7 +16,7 @@ const AddJob = () => {
         status,
         statusOptions,
         isEditing,
-        //editJobId,
+        editJobId,
     } = useSelector((store) => store.job)
     const {user} = useSelector((store) => store.user);
     const dispatch = useDispatch();
@@ -26,7 +26,11 @@ const AddJob = () => {
             toast.error('Please fill out all fields')
             return
         }
-        dispatch(createJob({ position, company, jobLocation, jobType, status }));
+        if (editJobId) {
+            dispatch(editJob({jobId: editJobId, job: {position, company, jobLocation, jobType, status}}));
+        } else {
+            dispatch(createJob({position, company, jobLocation, jobType, status}));
+        }
     }
     const handleJobInput = (e) => {
         const name = e.target.name;
@@ -38,7 +42,7 @@ const AddJob = () => {
             dispatch(handleChange({name: 'jobLocation', value: user.location}))
         }
         // eslint-disable-next-line
-    },[])
+    }, [])
     return (
         <Wrapper>
             <form className={'form'}>
@@ -49,7 +53,7 @@ const AddJob = () => {
                         name='position'
                         value={position}
                         handleChange={handleJobInput}
-                        />
+                    />
                     <FormRow
                         type='text'
                         name='company'
@@ -79,8 +83,12 @@ const AddJob = () => {
                         labelText='job type'
                     />
                     <div className="btn-container">
-                        <button type={"button"} className={'btn btn-block btn-clear'} onClick={() => dispatch(clearValues())}>clear</button>
-                        <button type={"submit"} className={'btn btn-block btn-submit'} onClick={handleSubmit} disabled={isLoading}>submit</button>
+                        <button type={"button"} className={'btn btn-block btn-clear'}
+                                onClick={() => dispatch(clearValues())}>clear
+                        </button>
+                        <button type={"submit"} className={'btn btn-block btn-submit'} onClick={handleSubmit}
+                                disabled={isLoading}>submit
+                        </button>
                     </div>
                 </div>
             </form>
