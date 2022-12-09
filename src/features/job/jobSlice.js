@@ -112,7 +112,7 @@ const jobSlice = createSlice({
             .addCase(editJob.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(editJob.fulfilled, (state, {payload}) => {
+            .addCase(editJob.fulfilled, (state) => {
                 state.isLoading = false;
                 toast.success('Job Updated!');
             })
