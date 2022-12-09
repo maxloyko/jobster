@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {toast} from 'react-toastify';
 import {addUserToLocalStorage, getUserToLocalStorage, removeUserToLocalStorage} from "../../utils/localStorage";
-import {loginUserThunk, registerUserThunk, updateUserThunk} from "./ userThunk";
+import {loginUserThunk, registerUserThunk, updateUserThunk} from "./userThunk";
 
 const initialState = {
     isLoading: false,
