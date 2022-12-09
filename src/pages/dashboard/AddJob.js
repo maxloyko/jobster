@@ -2,7 +2,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import {FormRow, FormRowSelect} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
-import {handleChange} from "../../features/job/jobSlice";
+import {handleChange, clearValues} from "../../features/job/jobSlice";
 
 const AddJob = () => {
     const {
@@ -70,7 +70,7 @@ const AddJob = () => {
                         labelText='job type'
                     />
                     <div className="btn-container">
-                        <button type={"button"} className={'btn btn-block btn-clear'} onClick={() => console.log('clear')}>clear</button>
+                        <button type={"button"} className={'btn btn-block btn-clear'} onClick={() => dispatch(clearValues())}>clear</button>
                         <button type={"submit"} className={'btn btn-block btn-submit'} onClick={handleSubmit} disabled={isLoading}>submit</button>
                     </div>
                 </div>
