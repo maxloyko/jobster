@@ -4,6 +4,7 @@ import Wrapper from '../assets/wrappers/Job';
 import { useDispatch } from 'react-redux';
 import JobInfo from "./JobInfo";
 import moment from "moment";
+import {deleteJob} from "../features/job/jobSlice";
 
 const Job = ({_id, position, company, jobLocation, jobType, createdAt, status}) => {
     const dispatch = useDispatch();
@@ -23,8 +24,6 @@ const Job = ({_id, position, company, jobLocation, jobType, createdAt, status}) 
             </header>
             <div className="content">
                 <div className='content-center'>
-                    <h4>more content</h4>
-                    <div className={`status ${status}`}>{status}</div>
                     <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
                     <JobInfo icon={<FaCalendarAlt />} text={date} />
                     <JobInfo icon={<FaBriefcase />} text={jobType} />
@@ -45,7 +44,7 @@ const Job = ({_id, position, company, jobLocation, jobType, createdAt, status}) 
                             type='button'
                             className='btn delete-btn'
                             onClick={() => {
-                                console.log('delete  job');
+                                dispatch(deleteJob(_id))
                             }}
                         >
                             Delete
