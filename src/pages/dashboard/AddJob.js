@@ -3,6 +3,7 @@ import {FormRow, FormRowSelect} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 import {handleChange, clearValues, createJob} from "../../features/job/jobSlice";
+import {useEffect} from "react";
 
 const AddJob = () => {
     const {
@@ -15,8 +16,9 @@ const AddJob = () => {
         status,
         statusOptions,
         isEditing,
-        editJobId,
+        //editJobId,
     } = useSelector((store) => store.job)
+    const {user} = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,6 +33,12 @@ const AddJob = () => {
         const value = e.target.value;
         dispatch(handleChange({name, value}))
     }
+    useEffect(() => {
+        if (!isEditing) {
+            dispatch(handleChange({name: 'jobLocation', value: user.location}))
+        }
+        // eslint-disable-next-line
+    },[])
     return (
         <Wrapper>
             <form className={'form'}>
