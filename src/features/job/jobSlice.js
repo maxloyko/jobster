@@ -27,13 +27,13 @@ export const createJob = createAsyncThunk('job/createJob',
             thunkAPI.dispatch(clearValues()); //clean form values
             return resp.data;
         } catch (error) {
-            // basic setup
-            return thunkAPI.rejectWithValue(error.response.data.msg);
             // logout user
             if (error.response.status === 401) {
                 thunkAPI.dispatch(logoutUser());
                 return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
             }
+            // basic setup
+            return thunkAPI.rejectWithValue(error.response.data.msg);
         }
     }
 )
